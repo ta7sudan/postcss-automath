@@ -42,6 +42,10 @@ module.exports = postcss.plugin('postcss-math', function () {
 
             if (node.type === 'decl') {
                 nodeProp = 'value';
+                // 理论上讲还有其他属性带/也应该特殊处理下, 而且不应该完全ban掉数学运算, 有空仔细改下
+                if (node.prop.match(/grid-area/)) {
+                  return;
+                }
             }
             else if (node.type === 'atrule' && node.name === 'media') {
                 nodeProp = 'params';
